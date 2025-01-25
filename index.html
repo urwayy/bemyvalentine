@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Question</title>
+    <style>
+        /* Using Google Font "Dancing Script" */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Dancing Script', cursive;
+            background-color: pink;
+            text-align: center;
+        }
+        .container {
+            padding: 50px;
+        }
+        h1, p {
+            font-family: 'Dancing Script', cursive;
+            font-size: 50px;
+        }
+        button {
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background-color: #fff;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #ffccff;
+        }
+        .button-no {
+            position: absolute;
+        }
+        .hidden {
+            display: none;
+        }
+        .message {
+            font-size: 24px;
+            margin-top: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="first-page" class="container">
+        <h1>Hi Mian!</h1>
+        <p>May I ask you something?</p>
+        <button id="yesButton">Yes, my love?</button>
+        <button id="noButton" class="button-no">No</button>
+    </div>
+
+    <div id="second-page" class="container hidden">
+        <h1>Will you be my valentine and make me the happiest wifey?</h1>
+        <button id="yesValentine">Yes!</button>
+        <button id="hellYes">HELL YES!</button>
+    </div>
+
+    <div id="confetti-container" class="hidden"></div>
+
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        let noButton = document.getElementById('noButton');
+        let yesButton = document.getElementById('yesButton');
+        let firstPage = document.getElementById('first-page');
+        let secondPage = document.getElementById('second-page');
+        let confettiContainer = document.getElementById('confetti-container');
+        let messageDiv = document.createElement('div');
+
+        noButton.addEventListener('click', () => {
+            let distance = parseInt(noButton.style.left.replace('px', '') || 0);
+            distance += 100;
+            noButton.style.left = distance + 'px';
+        });
+
+        yesButton.addEventListener('click', () => {
+            firstPage.classList.add('hidden');
+            secondPage.classList.remove('hidden');
+        });
+
+        const showConfetti = () => {
+            // Trigger confetti effect
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { x: 0.5, y: 0.5 }
+            });
+        };
+
+        document.getElementById('yesValentine').addEventListener('click', () => {
+            showConfetti();
+            setTimeout(() => {
+                showMessage();
+            }, 3000);
+        });
+
+        document.getElementById('hellYes').addEventListener('click', () => {
+            showConfetti();
+            setTimeout(() => {
+                showMessage();
+            }, 3000);
+        });
+
+        const showMessage = () => {
+            messageDiv.classList.add('message');
+            messageDiv.innerHTML = 'I knew it!!! I love you so much. I am so grateful to have you in my life, you make me so happy. I can\'t wait to spend my life with you. You are the best thing that has ever happened to me. Happy Valentine\'s!';
+            document.body.appendChild(messageDiv);
+        };
+    </script>
+</body>
+</html>
